@@ -12,11 +12,13 @@
 
 #define DHT_Type DHT22
 
+#define humLimit 98.00
+#define tempLimit 25.00
+
 DHT dht(dhtDataPin, DHT_Type);
 
 float hum;
 float temp;
-
 
 void setup() {
   Serial.begin(9600);
@@ -42,7 +44,7 @@ void loop() {
   getTempHum();
 
   // FAN ENABLE:
-  if ((temp > 25.00)||(hum > 98.00)) {
+  if ((temp > tempLimit)||(hum > humLimit)) {
     digitalWrite(fanEnablePin, HIGH);
   } else {
     digitalWrite(fanEnablePin, LOW);
@@ -56,7 +58,7 @@ void loop() {
 
 
 
-
+// FUNCTIONS
 
 void  getTempHum() {
   hum = dht.readHumidity();
@@ -68,13 +70,13 @@ void  getTempHum() {
 }
 
 void getLightSettings() {
-  if ((temp > 25.00)&&(hum > 60.00)) {
+  if ((temp > tempLimit)&&(hum > humLimit)) {
     digitalWrite(highTempLEDPin, HIGH);
     digitalWrite(highHumLEDPin, HIGH);
-  } else if (hum > 60.00) {
+  } else if (hum > humLimit) {
     digitalWrite(highTempLEDPin, LOW);
     digitalWrite(highHumLEDPin, HIGH);
-  } else if (temp > 25.00) {
+  } else if (temp > tempLimit) {
     digitalWrite(highTempLEDPin, HIGH);
     digitalWrite(highHumLEDPin, LOW);
   } else {
