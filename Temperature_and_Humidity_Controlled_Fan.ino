@@ -1,3 +1,7 @@
+// CREATED BY TOUTATISS, 12/01/2022
+// CODE IS FREE TO USE
+// FOR FURTHER DISCUSSION AND CONTACT INFO: jankoclock.wordpress.com
+
 #include <DHT.h>
 
 #define dhtDataPin 2
